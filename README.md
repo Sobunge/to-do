@@ -35,3 +35,8 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    git clone https://github.com/Sobunge/to-do.git
    cd todo-web-app
+
+2. **Set up the MySQL database:**
+
+   1. Create a new database named `todo`.
+   2. Update the database configuration in `/backend/src/main/resources/application.properties`.

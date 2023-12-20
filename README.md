@@ -40,3 +40,5 @@ Before you begin, ensure you have met the following requirements:
 
    1. Create a new database named `todo`.
    2. Update the database configuration in `/backend/src/main/resources/application.properties`.
+      
+3. **Set up Angular frontend:**

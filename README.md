@@ -91,5 +91,9 @@ Feel free to contribute to this project. To contribute:
 3. Make your changes and commit them.
 4. Submit a pull request.
 
+## License
+
+This project is licensed under the MIT License.
+
 
 

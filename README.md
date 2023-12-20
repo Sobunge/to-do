@@ -46,4 +46,8 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    cd frontend
    npm install
-   
+
+4. **Set up Spring Boot backend:**
+
+   1. Open the project in your IDE.
+   2. Update application.properties with the correct database configuration.

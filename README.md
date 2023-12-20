@@ -72,8 +72,8 @@ todo-web-app/
 
 1. **Start the Spring Boot backend:**
 
-   -Run the TodoApplication class.
-   -Access the application at http://localhost:8080.
+   - Run the TodoApplication class.
+   - Access the application at http://localhost:8080.
    
 3. **Start the Angular frontend:**
 
@@ -81,6 +81,7 @@ todo-web-app/
    cd frontend
    ng serve
    ```
+   - Access the application at http://localhost:4200.
 
 
 

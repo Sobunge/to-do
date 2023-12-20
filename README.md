@@ -66,6 +66,14 @@ todo-web-app/
     ├── src/
     ├── ...
     └── package.json
+```
 
+## Running the Application
+
+1. **Start the Spring Boot backend:**
+
+   -Run the TodoApplication class.
+   
+3. **Start the Angular frontend:**
 
 

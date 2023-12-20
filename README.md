@@ -42,3 +42,8 @@ Before you begin, ensure you have met the following requirements:
    2. Update the database configuration in `/backend/src/main/resources/application.properties`.
       
 3. **Set up Angular frontend:**
+
+   ```bash
+   cd frontend
+   npm install
+   

@@ -54,7 +54,8 @@ Before you begin, ensure you have met the following requirements:
   
 ## Project Structure
 
-   todo-web-app/
+```plaintext
+todo-web-app/
 │
 ├── backend/               # Spring Boot backend
 │   ├── src/
@@ -65,5 +66,6 @@ Before you begin, ensure you have met the following requirements:
     ├── src/
     ├── ...
     └── package.json
+
 
 

@@ -52,17 +52,18 @@ Before you begin, ensure you have met the following requirements:
    1. Open the project in your IDE.
    2. Update application.properties with the correct database configuration.
   
-5. **Project Structure**
+## Project Structure
 
-   to_do/
-   │
-   ├── backend/               # Spring Boot backend
-   │   ├── src/
-   │   ├── ...
-   │   └── pom.xml
-   │
-   └── frontend/              # Angular frontend
-      ├── src/
-      ├── ...
-      └── package.json
+   todo-web-app/
+│
+├── backend/               # Spring Boot backend
+│   ├── src/
+│   ├── ...
+│   └── pom.xml
+│
+└── frontend/              # Angular frontend
+    ├── src/
+    ├── ...
+    └── package.json
+
 

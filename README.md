@@ -34,7 +34,7 @@ Before you begin, ensure you have met the following requirements:
 
    ```bash
    git clone https://github.com/Sobunge/to-do.git
-   cd todo-web-app
+   cd to-do
 
 2. **Set up the MySQL database:**
 
@@ -55,7 +55,7 @@ Before you begin, ensure you have met the following requirements:
 ## Project Structure
 
 ```plaintext
-todo-web-app/
+to-do/
 │
 ├── backend/               # Spring Boot backend
 │   ├── src/

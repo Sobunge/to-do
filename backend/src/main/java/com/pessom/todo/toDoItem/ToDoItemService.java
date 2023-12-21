@@ -13,6 +13,7 @@ public class ToDoItemService {
 
     // Adding a todo item
     public ToDoItem addToDoItem(ToDoItem item) {
+        item.setStatus(Status.UNFINISHED);
         return toDoItemRepository.save(item);
     }
 

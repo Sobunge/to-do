@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,13 +21,13 @@ public class ToDoItemController {
 
     // Adding todo item
     @PostMapping("/add")
-    public ToDoItem addToDoItem(@ModelAttribute("ToDoItem") ToDoItem toDoItem) {
+    public ToDoItem addToDoItem(@RequestBody ToDoItem toDoItem) {
         return toDoItemService.addToDoItem(toDoItem);
     }
 
     // Updating todo item
     @PutMapping("/update")
-    public ToDoItem updaToDoItem(@ModelAttribute("ToDoItem") ToDoItem updatedToDoItem) {
+    public ToDoItem updaToDoItem(@RequestBody ToDoItem updatedToDoItem) {
         return toDoItemService.updateToDoItem(updatedToDoItem);
     }
 

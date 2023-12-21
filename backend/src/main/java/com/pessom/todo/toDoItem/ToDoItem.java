@@ -1,4 +1,4 @@
-package com.pessom.todo;
+package com.pessom.todo.toDoItem;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

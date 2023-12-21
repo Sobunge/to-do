@@ -18,8 +18,16 @@ public class ToDoItemService {
     }
 
     // Updating a todo item
-    public ToDoItem updateToDoItem(ToDoItem updaToDoItem) {
-        return toDoItemRepository.save(updaToDoItem);
+    public ToDoItem updateToDoItem(Long toDoItemId, ToDoItem updatedToDoItem){
+        try {
+         ToDoItem item = toDoItemRepository.findById(toDoItemId).get();
+         updatedToDoItem.setId(item.getId());
+         updatedToDoItem.setStatus(item.getStatus());   
+        } catch (Exception e) {
+            System.out.println("ToDo Item not found");
+        }
+        
+        return toDoItemRepository.save(updatedToDoItem);
     }
 
     // Deleting a todo item

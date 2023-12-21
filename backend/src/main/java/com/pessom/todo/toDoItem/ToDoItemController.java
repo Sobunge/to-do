@@ -20,19 +20,20 @@ public class ToDoItemController {
     ToDoItemService toDoItemService;
 
     // Adding todo item
-    @PostMapping("/add")
+    @PostMapping("/items")
     public ToDoItem addToDoItem(@RequestBody ToDoItem toDoItem) {
         return toDoItemService.addToDoItem(toDoItem);
     }
 
     // Updating todo item
-    @PutMapping("/update")
-    public ToDoItem updaToDoItem(@RequestBody ToDoItem updatedToDoItem) {
-        return toDoItemService.updateToDoItem(updatedToDoItem);
+    @PutMapping("/item/{toDoItemId}")
+    public ToDoItem updaToDoItem(@PathVariable Long toDoItemId, 
+    @RequestBody ToDoItem updatedToDoItem) {
+        return toDoItemService.updateToDoItem(toDoItemId, updatedToDoItem);
     }
 
     // Deleting a todo item
-    @DeleteMapping("/delete/{toDoItemId}")
+    @DeleteMapping("/items/{toDoItemId}")
     public void deleteToDoItem(@PathVariable Long toDoItemId) {
         toDoItemService.deleteToDoItem(toDoItemId);
     }
@@ -60,5 +61,7 @@ public class ToDoItemController {
     public List<ToDoItem> getAllUnfinishedItems() {
         return toDoItemService.getAllUnfinishedToDoItems();
     }
+
+    @PutMapping()
 
 }

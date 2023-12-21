@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ToDoItem {
-    
+
     @Id
     private long id;
     private String name;

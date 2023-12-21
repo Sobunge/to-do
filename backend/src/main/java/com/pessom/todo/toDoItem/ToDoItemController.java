@@ -14,48 +14,49 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class ToDoItemController {
-    
-    @Autowired ToDoItemService toDoItemService;
 
-    //Adding todo item
+    @Autowired
+    ToDoItemService toDoItemService;
+
+    // Adding todo item
     @GetMapping("/add")
-    public ToDoItem addToDoItem(@ModelAttribute("ToDoItem") ToDoItem toDoItem){
+    public ToDoItem addToDoItem(@ModelAttribute("ToDoItem") ToDoItem toDoItem) {
         return toDoItemService.addToDoItem(toDoItem);
     }
 
-    //Updating todo item
+    // Updating todo item
     @PutMapping("/update")
-    public ToDoItem updaToDoItem(@ModelAttribute("ToDoItem") ToDoItem updatedToDoItem){
+    public ToDoItem updaToDoItem(@ModelAttribute("ToDoItem") ToDoItem updatedToDoItem) {
         return toDoItemService.updateToDoItem(updatedToDoItem);
     }
 
-    //Deleting a todo item
+    // Deleting a todo item
     @DeleteMapping("/delete/{toDoItemId}")
-    public void deleteToDoItem(@PathVariable Long toDoItemId){
+    public void deleteToDoItem(@PathVariable Long toDoItemId) {
         toDoItemService.deleteToDoItem(toDoItemId);
     }
 
-    //Getting all todo items
+    // Getting all todo items
     @GetMapping("/items")
-    public List<ToDoItem> allToDoItems(){
+    public List<ToDoItem> allToDoItems() {
         return toDoItemService.getAllToDoItems();
     }
 
-    //Getting a todo item
+    // Getting a todo item
     @GetMapping("/items/{toDoItemId}")
-    public ToDoItem getToDoItem(@PathVariable Long toDoItemId){
+    public ToDoItem getToDoItem(@PathVariable Long toDoItemId) {
         return toDoItemService.getToDoItemById(toDoItemId);
     }
 
-    //Getting all finished todo items
+    // Getting all finished todo items
     @GetMapping("/items/finished")
-    public List<ToDoItem> getAllFinishedDoItems(){
+    public List<ToDoItem> getAllFinishedDoItems() {
         return toDoItemService.getAllFinishedToDoItems();
     }
 
-    //Getting all unfinished todo items
+    // Getting all unfinished todo items
     @GetMapping("/items/unfinished")
-    public List<ToDoItem> getAllUnfinishedItems(){
+    public List<ToDoItem> getAllUnfinishedItems() {
         return toDoItemService.getAllUnfinishedToDoItems();
     }
 

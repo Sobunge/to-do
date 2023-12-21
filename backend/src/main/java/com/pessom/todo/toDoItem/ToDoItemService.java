@@ -8,5 +8,14 @@ public class ToDoItemService {
     
     @Autowired ToDoItemRepository toDoItemRepository;
 
-    
+    //Adding a todo item
+
+    //Updating a todo item
+
+    //Deleting a todo item
+
+    //Getting all todo items
+
+    //Getting one todo item
+
 }

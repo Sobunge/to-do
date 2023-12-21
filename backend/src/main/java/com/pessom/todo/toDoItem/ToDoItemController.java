@@ -62,6 +62,16 @@ public class ToDoItemController {
         return toDoItemService.getAllUnfinishedToDoItems();
     }
 
-    @PutMapping()
+    @PutMapping("/items/{toDoItemId}/finished")
+    public ToDoItem changeToFinished(@PathVariable Long toDoItemId){
+        ToDoItem item = toDoItemService.getToDoItemById(toDoItemId);
+        return toDoItemService.toggleFinishedAndUnfinished(item, Status.FINISHED);
+    }
+
+    @PutMapping("/items/{toDoItemId}/unfinished")
+    public ToDoItem changeToUnfinished(@PathVariable Long toDoItemId){
+        ToDoItem item = toDoItemService.getToDoItemById(toDoItemId);
+        return toDoItemService.toggleFinishedAndUnfinished(item, Status.UNFINISHED);
+    }
 
 }

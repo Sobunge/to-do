@@ -55,4 +55,9 @@ public class ToDoItemService {
         return toDoItemRepository.findByStatus(Status.UNFINISHED);
     }
 
+    // Toggle between finished and unfinished
+    public ToDoItem toggleFinishedAndUnfinished(ToDoItem item, Status status){
+        item.setStatus(status);
+        return toDoItemRepository.save(item);
+    } 
 }

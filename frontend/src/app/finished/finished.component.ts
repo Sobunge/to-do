@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { TaskListComponent } from "../components/task-list/task-list.component";
-import { TaskService } from '../task.service';
-import { Task } from '../task';
 
 @Component({
     selector: 'app-finished',
@@ -12,11 +10,4 @@ import { Task } from '../task';
 })
 export class FinishedComponent {
 
-    public tasks: Task[] = [];
-
-    constructor(private _taskService: TaskService) { }
-
-    ngOnInit() {
-        this.tasks = this._taskService.getTasks();
-    }
 }

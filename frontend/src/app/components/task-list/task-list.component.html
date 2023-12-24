@@ -1,7 +1,6 @@
 <div class="container">
-
   <app-navbar></app-navbar>
-  <br>
+  <br />
   <table class="table">
     <thead>
       <tr>
@@ -12,50 +11,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
+      <tr *ngFor="let task of tasks">
+        <th scope="row">{{task.id}}</th>
         <td>
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value=""
-            id="defaultCheck1"
-          />
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
         </td>
-        <td>Otto</td>
+        <td>{{task.name}}</td>
         <td>
-          <input
-            type="checkbox"
-            class="btn-check"
-            id="btn-check-2-outlined"
-            autocomplete="off"
-          />
-          <label class="btn btn-outline-secondary" for="btn-check-2-outlined"
-            >Completed</label
-          ><br />
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value=""
-            id="defaultCheck1"
-          />
-        </td>
-        <td>Thornton</td>
-        <td>
-          <input
-            type="checkbox"
-            class="btn-check"
-            id="btn-check-3-outlined"
-            autocomplete="off"
-          />
-          <label class="btn btn-outline-secondary" for="btn-check-3-outlined"
-            >Completed</label
-          ><br />
+          <input type="checkbox" class="btn-check" id="btn-check-2-outlined" autocomplete="off" />
+          <label class="btn btn-outline-secondary" for="btn-check-2-outlined">Completed</label><br />
         </td>
       </tr>
     </tbody>

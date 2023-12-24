@@ -12,6 +12,7 @@ export class FooterComponent {
   public year = 0; 
 
   constructor (){
+
   }
 
   ngOnInit(){

@@ -14,11 +14,13 @@
       <tr *ngFor="let task of tasks">
         <th scope="row">{{task.id}}</th>
         <td>
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+          <input class="form-check-input" type="checkbox" value="" [checked]="task.status == 'finished'"
+            id="defaultCheck1" />
         </td>
         <td>{{task.name}}</td>
         <td>
-          <input type="checkbox" class="btn-check" id="btn-check-2-outlined" autocomplete="off" />
+          <input type="checkbox" class="btn-check" id="btn-check-2-outlined" autocomplete="off"
+            [checked]="task.status == 'finished'" />
           <label class="btn btn-outline-secondary" for="btn-check-2-outlined">Completed</label><br />
         </td>
       </tr>

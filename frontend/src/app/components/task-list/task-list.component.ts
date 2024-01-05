@@ -20,17 +20,18 @@ export class TaskListComponent {
     constructor(private _taskService: TaskService) { }
 
     ngOnInit() {
-        this.tasks = this._taskService.getTasks();
+        this._taskService.getTasks()
+            .subscribe(data => this.tasks = data);
     }
 
     handleCheckBoxClick(id: number) {
-        id = id - 1;
-        if (this.tasks[id].status == "finished") {
-            this.tasks[id].status = "unfinished"
-        } else {
-            this.tasks[id].status = "finished"
-        }
-
+        /*     id = id - 1;
+             if (this.tasks[id].status == "finished") {
+                 this.tasks[id].status = "unfinished"
+             } else {
+                 this.tasks[id].status = "finished"
+             }
+     */
     }
 
 }

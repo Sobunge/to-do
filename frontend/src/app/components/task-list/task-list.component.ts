@@ -17,8 +17,9 @@ import { Observable } from 'rxjs';
 export class TaskListComponent {
 
     public tasks: Task[] = [];
+    public task: Task | undefined;
 
-    constructor(private _taskService: TaskService) { }
+    constructor(private _taskService: TaskService) {}
 
     getTasks(): void {
         this._taskService.getTasks()
@@ -29,8 +30,18 @@ export class TaskListComponent {
         this.getTasks();
     }
 
+    getTask(taskId: number): void {
+        this._taskService.getTask(taskId)
+        .subscribe(data => this.task = data);
+    }
+
     handleCheckBoxClick(id: number) {
-        alert(this.tasks.length);
+        this.getTask(id);
+        if (this.task?.status == "FINISHED") {
+            this._taskService.changeTaskToUnfinished;
+        } else {
+            this._taskService.changeTaskToFinished
+        }
       /*
         if (this.tasks[id].status == "finished") {
             this.tasks[id].status = "unfinished"

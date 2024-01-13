@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class ToDoItemController {
 
     @Autowired
@@ -41,7 +42,6 @@ public class ToDoItemController {
 
     // Getting all todo items
     @GetMapping("/items")
-    @CrossOrigin
     public List<ToDoItem> allToDoItems() {
         return toDoItemService.getAllToDoItems();
     }

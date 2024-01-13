@@ -8,12 +8,26 @@ import { Task } from './task';
 })
 export class TaskService {
 
-  private _url: string = "http://localhost:8080/api/items"
+  private getAllTasksUrl: string = "http://localhost:8080/api/items"
+  private getTaskUrl: string = "http://localhost:8080/api/items/";
+  private updateTaskStatusToFinishedUrl: string = "http://localhost:8080/api/items/{toDoItemId}/finished";
+  private updateTaskStatusToUnFinishedUrl: string = "http://localhost:8080/api/items/{toDoItemId}/unfinished";
 
   constructor(private http: HttpClient) { }
 
   getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this._url);
+    return this.http.get<Task[]>(this.getAllTasksUrl);
   }
 
+  getTask(taskId: number): Observable<Task> {
+    return this.http.get<Task>(this.getTaskUrl + taskId);
+  }
+
+  changeTaskToFinished(): Observable<Task> {
+    return this.http.put<Task>(this.updateTaskStatusToFinishedUrl, undefined);
+  }
+
+  changeTaskToUnfinished(): Observable<Task> {
+    return this.http.put<Task>(this.updateTaskStatusToUnFinishedUrl, undefined);
+  }
 }

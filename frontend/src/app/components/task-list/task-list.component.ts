@@ -4,6 +4,7 @@ import { NavbarComponent } from "../navbar/navbar.component";
 import { NgFor, NgIf } from '@angular/common';
 import { Task } from '../../task';
 import { TaskService } from '../../task.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-task-list',
@@ -19,19 +20,24 @@ export class TaskListComponent {
 
     constructor(private _taskService: TaskService) { }
 
-    ngOnInit() {
+    getTasks(): void {
         this._taskService.getTasks()
             .subscribe(data => this.tasks = data);
     }
 
+    ngOnInit() {
+        this.getTasks();
+    }
+
     handleCheckBoxClick(id: number) {
-        /*     id = id - 1;
-             if (this.tasks[id].status == "finished") {
-                 this.tasks[id].status = "unfinished"
-             } else {
-                 this.tasks[id].status = "finished"
-             }
-     */
+        alert(this.tasks.length);
+      /*
+        if (this.tasks[id].status == "finished") {
+            this.tasks[id].status = "unfinished"
+        } else {
+            this.tasks[id].status = "finished"
+        }
+        */
     }
 
 }

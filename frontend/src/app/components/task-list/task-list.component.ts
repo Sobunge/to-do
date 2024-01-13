@@ -4,7 +4,6 @@ import { NavbarComponent } from "../navbar/navbar.component";
 import { NgFor, NgIf } from '@angular/common';
 import { Task } from '../../task';
 import { TaskService } from '../../task.service';
-import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-task-list',
@@ -19,7 +18,7 @@ export class TaskListComponent {
     public tasks: Task[] = [];
     public task: Task | undefined;
 
-    constructor(private _taskService: TaskService) {}
+    constructor(private _taskService: TaskService) { }
 
     getTasks(): void {
         this._taskService.getTasks()
@@ -32,23 +31,35 @@ export class TaskListComponent {
 
     getTask(taskId: number): void {
         this._taskService.getTask(taskId)
-        .subscribe(data => this.task = data);
+            .subscribe(data => this.task = data);
+    }
+
+    changeTaskToFinished(taskId: number): void {
+        this._taskService.changeTaskToFinished(taskId)
+            .subscribe(() => this.getTasks());
+    }
+
+    changeTaskToUnfinished(taskId: number): void {
+        this._taskService.changeTaskToUnfinished(taskId)
+            .subscribe(() => this.getTasks());
     }
 
     handleCheckBoxClick(id: number) {
         this.getTask(id);
         if (this.task?.status == "FINISHED") {
-            this._taskService.changeTaskToUnfinished;
+            alert("goal");
+            //this.changeTaskToUnfinished(id);
         } else {
-            this._taskService.changeTaskToFinished
+            alert("no goal");
+            //this.changeTaskToFinished(id);
         }
-      /*
-        if (this.tasks[id].status == "finished") {
-            this.tasks[id].status = "unfinished"
-        } else {
-            this.tasks[id].status = "finished"
-        }
-        */
+        /*
+          if (this.tasks[id].status == "finished") {
+              this.tasks[id].status = "unfinished"
+          } else {
+              this.tasks[id].status = "finished"
+          }
+          */
     }
 
 }

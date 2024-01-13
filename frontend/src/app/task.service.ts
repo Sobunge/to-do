@@ -8,11 +8,8 @@ import { Task } from './task';
 })
 export class TaskService {
 
-  private getAllTasksUrl: string = "http://localhost:8080/api/items"
-  private getTaskUrl: string = "http://localhost:8080/api/items/";
-  private updateTaskStatusToFinishedUrl: string = "http://localhost:8080/api/items/{toDoItemId}/finished";
-  private updateTaskStatusToUnFinishedUrl: string = "http://localhost:8080/api/items/{toDoItemId}/unfinished";
-
+  private taskUrl: string = "http://localhost:8080/api/"
+  
   constructor(private http: HttpClient) { }
 
   httpOptions = {
@@ -22,18 +19,22 @@ export class TaskService {
   };
 
   getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.getAllTasksUrl);
+    const url = this.taskUrl + "items";
+    return this.http.get<Task[]>(url);
   }
 
   getTask(taskId: number): Observable<Task> {
-    return this.http.get<Task>(this.getTaskUrl + taskId);
+    const url = this.taskUrl + "items/" + taskId;
+    return this.http.get<Task>(url);
   }
 
-  changeTaskToFinished(): Observable<Task> {
-    return this.http.put<Task>(this.updateTaskStatusToFinishedUrl, undefined);
+  changeTaskToFinished(taskId: number): Observable<Task> {
+    const url = this.taskUrl + "items/" + taskId + "/finished";
+    return this.http.put<Task>(url, {}, this.httpOptions);
   }
 
-  changeTaskToUnfinished(): Observable<Task> {
-    return this.http.put<Task>(this.updateTaskStatusToUnFinishedUrl, undefined);
+  changeTaskToUnfinished(taskId: number): Observable<Task> {
+    const url = this.taskUrl + "items/" + taskId + "/unfinished";
+    return this.http.put<Task>(url, {}, this.httpOptions);
   }
 }

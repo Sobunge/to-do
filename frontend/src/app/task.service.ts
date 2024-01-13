@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from './task';
@@ -14,6 +14,12 @@ export class TaskService {
   private updateTaskStatusToUnFinishedUrl: string = "http://localhost:8080/api/items/{toDoItemId}/unfinished";
 
   constructor(private http: HttpClient) { }
+
+  httpOptions = {
+    headers: new HttpHeaders(
+      {'Content-Type':'application/json'}
+    )
+  };
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(this.getAllTasksUrl);

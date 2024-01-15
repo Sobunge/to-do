@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FooterComponent } from "../footer/footer.component";
 import { NavbarComponent } from "../navbar/navbar.component";
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { TaskService } from '../../task.service';
+import { Task } from '../../task';
 
 @Component({
     selector: 'app-task-list',
@@ -12,10 +13,10 @@ import { TaskService } from '../../task.service';
     imports: [FooterComponent, NavbarComponent, NgFor]
 })
 
-export class TaskListComponent {
+export class TaskListComponent implements OnInit{
 
+    public task : Task | undefined;
     public tasks: Task[] = [];
-    const task = new Task();
 
     constructor(private _taskService: TaskService) { }
 
@@ -43,23 +44,12 @@ export class TaskListComponent {
             .subscribe(() => this.getTasks());
     }
 
-    handleCheckBoxClick(id: number) {
-        this.getTask(id);
-        alert("Your task is: " + this.task);
-       /* if (this.task?.status == "FINISHED") {
-            alert("goal");
-            //this.changeTaskToUnfinished(id);
+    isTaskFinished(taskStatus: string): boolean{
+        if(taskStatus === 'FINISHED'){
+            return true;
         } else {
-            alert("no goal");
-            //this.changeTaskToFinished(id);
-        }*/
-        /*
-          if (this.tasks[id].status == "finished") {
-              this.tasks[id].status = "unfinished"
-          } else {
-              this.tasks[id].status = "finished"
-          }
-          */
+            return false;
+        }
     }
 
 }

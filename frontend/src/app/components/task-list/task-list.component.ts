@@ -13,9 +13,9 @@ import { Task } from '../../task';
     imports: [FooterComponent, NavbarComponent, NgFor]
 })
 
-export class TaskListComponent implements OnInit{
+export class TaskListComponent implements OnInit {
 
-    public task : Task | undefined;
+    public task: Task | undefined;
     public tasks: Task[] = [];
 
     constructor(private _taskService: TaskService) { }
@@ -29,11 +29,6 @@ export class TaskListComponent implements OnInit{
         this.getTasks();
     }
 
-    getTask(taskId: number): void {
-        this._taskService.getTask(taskId)
-            .subscribe(data => this.task = data);
-    }
-
     changeTaskToFinished(taskId: number): void {
         this._taskService.changeTaskToFinished(taskId)
             .subscribe(() => this.getTasks());
@@ -44,12 +39,26 @@ export class TaskListComponent implements OnInit{
             .subscribe(() => this.getTasks());
     }
 
-    isTaskFinished(taskStatus: string): boolean{
-        if(taskStatus === 'FINISHED'){
+    isTaskFinished(taskStatus: string): boolean {
+        if (taskStatus === 'FINISHED') {
             return true;
         } else {
             return false;
         }
+    }
+
+    handleButtonClick(id: number): void {
+
+        this._taskService.getTask(id)
+            .subscribe((data: Task) => {
+                this.task = data;
+
+                if (this.task?.status === "FINISHED") {
+                    this.changeTaskToUnfinished(id);
+                } else {
+                    this.changeTaskToFinished(id);
+                }
+            });
     }
 
 }

@@ -12,15 +12,16 @@ import { TaskService } from '../task.service';
 })
 export class FinishedComponent implements OnInit {
 
-    public tasks : Task[] = [];
+    public tasks: Task[] = [];
 
-    constructor(private _taskService: TaskService){}
+    constructor(private _taskService: TaskService) { }
 
-    getFinishedTasks(): void{
-        this._taskService.
+    getFinishedTasks(): void {
+        this._taskService.getFinishedTasks()
+            .subscribe(data => this.tasks = data);
     }
 
-    ngOnInit(): void{
+    ngOnInit(): void {
         this.getFinishedTasks();
     }
 }

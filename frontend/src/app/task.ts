@@ -6,10 +6,10 @@ class Task {
     private _status: string;
 
     // Constructor
-    constructor(id: number, name: string, status: string) {
-        this._id = id;
-        this._name = name;
-        this._status = status;
+    constructor(id?: number, name?: string, status?: string) {
+        this._id = id !== undefined ? id : 0;
+        this._name = name !== undefined ? name : "";
+        this._status = status !== undefined ? status : "";
     }
 
     // Id setter

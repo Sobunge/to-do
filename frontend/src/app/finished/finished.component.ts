@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TaskListComponent } from "../components/task-list/task-list.component";
+import { Task } from '../task';
+import { TaskService } from '../task.service';
 
 @Component({
     selector: 'app-finished',
@@ -8,6 +10,17 @@ import { TaskListComponent } from "../components/task-list/task-list.component";
     styleUrl: './finished.component.css',
     imports: [TaskListComponent]
 })
-export class FinishedComponent {
+export class FinishedComponent implements OnInit {
 
+    public tasks : Task[] = [];
+
+    constructor(private _taskService: TaskService){}
+
+    getFinishedTasks(): void{
+        this._taskService.
+    }
+
+    ngOnInit(): void{
+        this.getFinishedTasks();
+    }
 }

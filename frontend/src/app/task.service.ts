@@ -9,23 +9,37 @@ import { Task } from './task';
 export class TaskService {
 
   private taskUrl: string = "http://localhost:8080/api/"
-  
-  constructor(private http: HttpClient) { }
+
+  public url: string;
+
+  constructor(private http: HttpClient) {
+    this.url = "";
+  }
 
   httpOptions = {
     headers: new HttpHeaders(
-      {'Content-Type':'application/json'}
+      { 'Content-Type': 'application/json' }
     )
   };
 
   getTasks(): Observable<Task[]> {
-    const url = this.taskUrl + "items";
-    return this.http.get<Task[]>(url);
+    this.url = this.taskUrl + "items";
+    return this.http.get<Task[]>(this.url);
   }
 
   getTask(taskId: number): Observable<Task> {
-    const url = this.taskUrl + "items/" + taskId;
-    return this.http.get<Task>(url);
+    this.url = this.taskUrl + "items/" + taskId;
+    return this.http.get<Task>(this.url);
+  }
+
+  getFinishedTasks(): Observable<Task[]> {
+    this.url = this.taskUrl + "items/finished";
+    return this.http.get<Task[]>(this.url);
+  }
+
+  getUnfinishedTasks(): Observable<Task[]> {
+    this.url = this.taskUrl + "items/unfinished";
+    return this.http.get<Task[]>(this.url);
   }
 
   changeTaskToFinished(taskId: number): Observable<Task> {

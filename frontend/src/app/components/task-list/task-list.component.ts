@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FooterComponent } from "../footer/footer.component";
 import { NavbarComponent } from "../navbar/navbar.component";
 import { NgFor, NgIf } from '@angular/common';
-import { Task } from '../../task';
 import { TaskService } from '../../task.service';
 
 @Component({
@@ -16,7 +15,7 @@ import { TaskService } from '../../task.service';
 export class TaskListComponent {
 
     public tasks: Task[] = [];
-    public task: Task | undefined;
+    const task = new Task();
 
     constructor(private _taskService: TaskService) { }
 
@@ -46,13 +45,14 @@ export class TaskListComponent {
 
     handleCheckBoxClick(id: number) {
         this.getTask(id);
-        if (this.task?.status == "FINISHED") {
+        alert("Your task is: " + this.task);
+       /* if (this.task?.status == "FINISHED") {
             alert("goal");
             //this.changeTaskToUnfinished(id);
         } else {
             alert("no goal");
             //this.changeTaskToFinished(id);
-        }
+        }*/
         /*
           if (this.tasks[id].status == "finished") {
               this.tasks[id].status = "unfinished"

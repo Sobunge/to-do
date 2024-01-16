@@ -51,4 +51,10 @@ export class TaskService {
     const url = this.taskUrl + "items/" + taskId + "/unfinished";
     return this.http.put<Task>(url, {}, this.httpOptions);
   }
+
+  addTask(task: Task): Observable<Task> {
+    const url = this.taskUrl + "items";
+    return this.http.post<Task>(url, task, this.httpOptions);
+  }
+
 }

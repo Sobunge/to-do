@@ -15,18 +15,21 @@
         <th scope="row">{{i + 1}}</th>
         <td>
           <input class="form-check-input" type="checkbox" value="" [checked]="isTaskFinished(task.status)"
-            id="defaultCheck1" (click)="handleButtonClick(task.id)"/>
+            id="defaultCheck1" (click)="toggleTaskCompletionButton(task.id)" />
         </td>
         <td>{{task. name}}</td>
         <td>
           <input type="checkbox" class="btn-check" [id]="'btn-check-'+ task.id + '-outlined'" autocomplete="off"
-            [checked]="isTaskFinished(task.status)" (click)="handleButtonClick(task.id)"/>
+            [checked]="isTaskFinished(task.status)" (click)="toggleTaskCompletionButton(task.id)" />
           <label class="btn btn-outline-secondary"
             [for]="'btn-check-' + task.id + '-outlined'">{{task.status}}</label><br />
         </td>
       </tr>
     </tbody>
   </table>
+  <div *ngIf="tasks.length === 0" class="alert alert-warning" style="text-align: center;" role="alert">
+    No task has been added
+  </div>
 
   <app-footer></app-footer>
 </div>

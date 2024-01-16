@@ -13,6 +13,7 @@ import { TaskService } from '../task.service';
 export class FinishedComponent implements OnInit {
 
     public tasks: Task[] = [];
+    public task: Task | undefined;
 
     constructor(private _taskService: TaskService) { }
 
@@ -23,5 +24,16 @@ export class FinishedComponent implements OnInit {
 
     ngOnInit(): void {
         this.getFinishedTasks();
+    }
+
+    changeTaskToUnfinished(taskId: number): void {
+        this._taskService.changeTaskToUnfinished(taskId)
+            .subscribe(() => this.getFinishedTasks());
+    }
+
+    unfinishTaskButton(id: number): void {
+
+        this.changeTaskToUnfinished(id);
+
     }
 }

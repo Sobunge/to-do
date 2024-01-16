@@ -2,23 +2,42 @@
   <h2>To-Do</h2>
 </div>
 
+<div style="text-align: right;">
+  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+    Task</button>
+</div>
+
 <ul class="nav nav-underline">
   <li class="nav-item">
-    <a
-      class="nav-link"
-      routerLinkActive="active"
-      routerLink="/unfinished"
-      arialCurrentWhenActive="page"
-      >Active Tasks</a
-    >
+    <a class="nav-link" routerLinkActive="active" routerLink="/unfinished" arialCurrentWhenActive="page">Active
+      Tasks</a>
   </li>
   <li class="nav-item">
-    <a
-      class="nav-link"
-      routerLinkActive="active"
-      routerLink="/finished"
-      arialCurrentWhenActive="page"
-      >Completed Tasks</a
-    >
+    <a class="nav-link" routerLinkActive="active" routerLink="/finished" arialCurrentWhenActive="page">Completed
+      Tasks</a>
   </li>
 </ul>
+
+<!-- Add Task Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">New Task</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="nameInput" class="form-label">Name</label>
+            <input type="text" class="form-control" id="nameInput" aria-describedby="nameHelp">
+          </div>
+          <button type="submit" class="btn btn-success btn-sm">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

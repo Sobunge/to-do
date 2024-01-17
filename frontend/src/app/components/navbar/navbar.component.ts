@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Task } from '../../task';
-import { TaskService } from '../../task.service';
+import { Task } from '../../modal/task';
+import { TaskService } from '../../service/task.service';
 
 @Component({
   selector: 'app-navbar',

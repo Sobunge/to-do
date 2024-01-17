@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { FooterComponent } from "../footer/footer.component";
 import { NavbarComponent } from "../navbar/navbar.component";
 import { NgFor, NgIf } from '@angular/common';
-import { TaskService } from '../../task.service';
-import { Task } from '../../task';
+import { TaskService } from '../../service/task.service';
+import { Task } from '../../modal/task';
 
 @Component({
     selector: 'app-task-list',

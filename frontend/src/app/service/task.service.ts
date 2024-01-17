@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Task } from './task';
+import { Task } from '../modal/task';
 
 @Injectable({
   providedIn: 'root'

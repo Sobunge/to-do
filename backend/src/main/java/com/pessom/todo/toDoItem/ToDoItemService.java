@@ -12,7 +12,9 @@ public class ToDoItemService {
     ToDoItemRepository toDoItemRepository;
 
     // Adding a todo item
-    public ToDoItem addToDoItem(ToDoItem item) {
+    public ToDoItem addToDoItem(String name) {
+        ToDoItem item = new ToDoItem();
+        item.setName(name);
         item.setStatus(Status.UNFINISHED);
         return toDoItemRepository.save(item);
     }

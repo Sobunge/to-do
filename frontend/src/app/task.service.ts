@@ -52,9 +52,9 @@ export class TaskService {
     return this.http.put<Task>(url, {}, this.httpOptions);
   }
 
-  addTask(task: Task): Observable<Task> {
+  addTask(name: string): Observable<Task> {
     const url = this.taskUrl + "items";
-    return this.http.post<Task>(url, task, this.httpOptions);
+    return this.http.post<Task>(url, name, this.httpOptions);
   }
 
 }

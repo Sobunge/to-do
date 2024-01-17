@@ -4,6 +4,7 @@ import { NavbarComponent } from "../navbar/navbar.component";
 import { NgFor, NgIf } from '@angular/common';
 import { TaskService } from '../../service/task.service';
 import { Task } from '../../modal/task';
+import { Status } from '../../modal/status';
 
 @Component({
     selector: 'app-task-list',
@@ -37,14 +38,16 @@ export class TaskListComponent {
 
         this._taskService.getTask(taskId)
             .subscribe(data => {
-                if (data.status === "FINISHED") {
-                    this._taskService.changeTaskToUnfinished(taskId)
+                if (data.status === Status.FINISHED) {
+                    alert("Finished");
+                    /*this._taskService.changeTaskToUnfinished(taskId)
                         .subscribe(() => this._taskService.getFinishedTasks()
-                            .subscribe(data => this.tasks = data));
+                            .subscribe(data => this.tasks = data));*/
                 } else {
-                    this._taskService.changeTaskToFinished(taskId)
+                    alert("Unfinished");
+                    /*this._taskService.changeTaskToFinished(taskId)
                         .subscribe(() => this._taskService.getUnfinishedTasks()
-                            .subscribe(data => this.tasks = data));
+                            .subscribe(data => this.tasks = data));*/
                 }
             });
 

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -24,8 +23,8 @@ public class ToDoItemController {
 
     // Adding todo item
     @PostMapping("/items")
-    public ToDoItem addToDoItem(@RequestParam String name) {
-        return toDoItemService.addToDoItem(name);
+    public ToDoItem addToDoItem(@RequestBody ToDoItem item) {
+        return toDoItemService.addToDoItem(item);
     }
 
     // Updating todo item

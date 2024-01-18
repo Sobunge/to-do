@@ -10,6 +10,7 @@
         <th scope="col"></th>
         <th scope="col">Name</th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -23,9 +24,10 @@
         <td>
           <input type="checkbox" class="btn-check" [id]="'btn-check-'+ task.id + '-outlined'" autocomplete="off"
             [checked]="isTaskFinished(task.status)" (click)="toggleTaskCompletionButton(task.id)" />
-          <label class="btn btn-outline-secondary"
+          <label class="btn btn-sm btn-outline-secondary"
             [for]="'btn-check-' + task.id + '-outlined'">{{task.status}}</label><br />
         </td>
+        <td><button class="btn btn-danger btn-sm">Delete</button></td>
       </tr>
     </tbody>
   </table>

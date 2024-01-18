@@ -1,4 +1,4 @@
 export enum Status{
-    FINISHED="Finished",
-    UNFINISHED="Unfinished"
+    FINISHED="FINISHED",
+    UNFINISHED="UNFINISHED"
 }

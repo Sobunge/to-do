@@ -21,8 +21,8 @@ export class TaskListComponent {
 
     constructor(private _taskService: TaskService) { }
 
-    isTaskFinished(taskStatus: string): boolean {
-        if (taskStatus === 'FINISHED') {
+    isTaskFinished(taskStatus: Status): boolean {
+        if (taskStatus === Status.FINISHED) {
             return true;
         } else {
             return false;
@@ -39,15 +39,13 @@ export class TaskListComponent {
         this._taskService.getTask(taskId)
             .subscribe(data => {
                 if (data.status === Status.FINISHED) {
-                    alert("Finished");
-                    /*this._taskService.changeTaskToUnfinished(taskId)
+                    this._taskService.changeTaskToUnfinished(taskId)
                         .subscribe(() => this._taskService.getFinishedTasks()
-                            .subscribe(data => this.tasks = data));*/
+                            .subscribe(data => this.tasks = data));
                 } else {
-                    alert("Unfinished");
-                    /*this._taskService.changeTaskToFinished(taskId)
+                    this._taskService.changeTaskToFinished(taskId)
                         .subscribe(() => this._taskService.getUnfinishedTasks()
-                            .subscribe(data => this.tasks = data));*/
+                            .subscribe(data => this.tasks = data));
                 }
             });
 

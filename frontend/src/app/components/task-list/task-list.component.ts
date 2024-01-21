@@ -5,6 +5,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { TaskService } from '../../service/task.service';
 import { Task } from '../../modal/task';
 import { Status } from '../../modal/status';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-task-list',
@@ -19,7 +20,7 @@ export class TaskListComponent {
     @Input() tasks: Task[] = [];
     public task: Task | undefined;
 
-    constructor(private _taskService: TaskService) { }
+    constructor(private _taskService: TaskService, private router: Router) { }
 
     isTaskFinished(taskStatus: Status): boolean {
         if (taskStatus === Status.FINISHED) {
@@ -47,6 +48,27 @@ export class TaskListComponent {
                         .subscribe(() => this._taskService.getUnfinishedTasks()
                             .subscribe(data => this.tasks = data));
                 }
+            });
+
+    }
+
+    deleteTask(taskId: number): void {
+
+        let url: string;
+
+        this._taskService.getTask(taskId).subscribe(data => {
+            if (data.status === Status.FINISHED) {
+                url = "finished";
+            } else {
+                url = "unfinished";
+            }
+        });
+
+        this._taskService.deleteTask(taskId)
+            .subscribe(() => {
+                this.router.navigate([url]).then(() => {
+                    window.location.reload();
+                });
             });
 
     }

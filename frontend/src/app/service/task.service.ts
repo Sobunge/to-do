@@ -57,4 +57,9 @@ export class TaskService {
     return this.http.post<Task>(url, task, this.httpOptions);
   }
 
+  deleteTask(taskId: number): Observable<Task> {
+    const url = this.taskUrl + "items/" + taskId;
+    return this.http.delete<Task>(url, this.httpOptions);
+  }
+
 }

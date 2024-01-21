@@ -3,7 +3,7 @@
 </div>
 
 <div style="text-align: right;">
-  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add
     Task</button>
 </div>
 
@@ -19,20 +19,19 @@
 </ul>
 
 <!-- Add Task Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">New Task</h1>
+        <h1 class="modal-title fs-5" id="addTaskModalLabel">New Task</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      
+
       <div class="modal-body">
         <form [formGroup]="addTaskForm" (ngSubmit)="addTask()">
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" aria-describedby="nameHelp"
-              formControlName="name">
+            <input type="text" class="form-control" id="name" aria-describedby="nameHelp" formControlName="name">
           </div>
           <button type="submit" class="btn btn-success btn-sm" data-bs-dismiss="modal">Submit</button>
         </form>

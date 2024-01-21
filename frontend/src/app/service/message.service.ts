@@ -1,19 +1,27 @@
 import { Injectable } from '@angular/core';
+import { Message } from '../modal/message';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
 
-  message: string[] = []; 
+  message: Message | undefined;
 
   constructor() { }
 
-  add(message: string): void{
-    this.message.push(message);
+  successMessage(outputMessage: string): void {
+    console.log('Setting success message:', outputMessage);
+    this.message = new Message(outputMessage, "success");
+    console.log('Message set:', this.message);
   }
 
-  clear(): void{  
-    this.message = [];
+  dangerMessage(outputMessage: string): void {
+    this.message = new Message(outputMessage, "danger");
+  }
+
+  warningMessage(outputMessage: string): void {
+    this.message = new Message(outputMessage, "warning");
   }
 }

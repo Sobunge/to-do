@@ -7,6 +7,7 @@ import { Task } from '../../modal/task';
 import { Status } from '../../modal/status';
 import { Router } from '@angular/router';
 import { Message } from '../../modal/message';
+import { MessageService } from '../../service/message.service';
 
 
 @Component({
@@ -20,10 +21,10 @@ import { Message } from '../../modal/message';
 export class TaskListComponent {
 
     @Input() tasks: Task[] = [];
-    public task: Task | undefined;
     public message: Message | undefined;
+    public task: Task | undefined;
 
-    constructor(private _taskService: TaskService, private router: Router) { }
+    constructor(private _taskService: TaskService, private router: Router, public messageService: MessageService) { }
 
     isTaskFinished(taskStatus: Status): boolean {
         if (taskStatus === Status.FINISHED) {
@@ -71,7 +72,8 @@ export class TaskListComponent {
         this.tasks = this.tasks.filter(task => task.id !== taskId);
         this._taskService.deleteTask(taskId)
             .subscribe();
-        this.message = new Message("Task successfully deleted", "danger");
+
+        this.message = new Message("Task deleted successfully", "danger");
 
     }
 

@@ -3,7 +3,10 @@
   <app-navbar></app-navbar>
 
   <br />
-  <p [class]="'alert alert-' + message?.status">{{message?.message}}</p>
+  <span *ngIf="messageService.message">
+    <p [class]="'alert alert-' + messageService.message.status">{{ messageService.message.message }}</p>
+  </span>
+  
   <table class="table">
     <thead>
       <tr>

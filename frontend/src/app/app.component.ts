@@ -10,6 +10,5 @@ import { RouterOutlet } from '@angular/router';
     imports: [CommonModule, RouterOutlet]
 })
 export class AppComponent {
-  title = 'frontend';
-  isChecked = false;
+ 
 }

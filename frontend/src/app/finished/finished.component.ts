@@ -21,7 +21,7 @@ export class FinishedComponent implements OnInit {
         this._taskService.getFinishedTasks()
             .subscribe(data => this.tasks = data);
     }
-
+ 
     ngOnInit(): void {
         this.getFinishedTasks();
     }

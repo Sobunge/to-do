@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TaskService } from '../../service/task.service';
@@ -12,7 +12,7 @@ import { Status } from '../../modal/status';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit{
 
   public tasks: Task[] = [];
   addTaskForm: FormGroup;
@@ -21,6 +21,15 @@ export class NavbarComponent {
     this.addTaskForm = this.fb.group({
       name: ['']
     });
+  }
+
+  ngOnInit(): void {
+      this.gettingAllUnFinishedTasks();
+  }
+
+  gettingAllUnFinishedTasks(): void{
+    this._taskService.getUnfinishedTasks()
+    .subscribe(data => this.tasks = data);
   }
 
   addTask(): void {
@@ -33,10 +42,8 @@ export class NavbarComponent {
     };
 
     this._taskService.addTask(task)
-      .subscribe(() => {
-        this.router.navigate(['unfinished']).then(() => {
-          window.location.reload();
-        });
+      .subscribe(data => {
+        this.tasks.push(data);
       });
 
   }

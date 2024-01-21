@@ -6,8 +6,6 @@ import { TaskService } from '../../service/task.service';
 import { Task } from '../../modal/task';
 import { Status } from '../../modal/status';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @Component({
@@ -23,7 +21,7 @@ export class TaskListComponent {
     @Input() tasks: Task[] = [];
     public task: Task | undefined;
 
-    constructor(private _taskService: TaskService, private router: Router, private toastr: ToastrService) { }
+    constructor(private _taskService: TaskService, private router: Router) { }
 
     isTaskFinished(taskStatus: Status): boolean {
         if (taskStatus === Status.FINISHED) {

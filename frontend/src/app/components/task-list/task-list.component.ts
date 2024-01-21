@@ -57,6 +57,7 @@ export class TaskListComponent {
         let url: string;
 
         this._taskService.getTask(taskId).subscribe(data => {
+            this.task = data;
             if (data.status === Status.FINISHED) {
                 url = "finished";
             } else {
@@ -64,12 +65,9 @@ export class TaskListComponent {
             }
         });
 
+        this.tasks = this.tasks.filter(task => task.id !== taskId);
         this._taskService.deleteTask(taskId)
-            .subscribe(() => {
-                this.router.navigate([url]).then(() => {
-                    window.location.reload();
-                });
-            });
+            .subscribe();
 
     }
 

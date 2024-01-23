@@ -47,6 +47,7 @@ export class NavbarComponent {
         }
         this.message = new Message(data.name + " saved successfully", "success");
         this.triggerToast();
+        this.addTaskForm.reset();
       });
 
   }

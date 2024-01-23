@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { FooterComponent } from "../footer/footer.component";
 import { NavbarComponent } from "../navbar/navbar.component";
 import { NgFor, NgIf } from '@angular/common';
@@ -58,10 +58,12 @@ export class TaskListComponent {
 
     deleteTask(taskId: number): void {
 
+        this.message = new Message("Task successfully deleted", "success");
+
         this.tasks = this.tasks.filter(task => task.id !== taskId);
         this._taskService.deleteTask(taskId)
             .subscribe(() => {
-                this.message = this.messageService.successMessage("Task deleted successfully.");
+                this.triggerToast();
             });
 
     }
@@ -72,6 +74,10 @@ export class TaskListComponent {
 
     handleTasksFromChild(tasks: Task[]) {
         this.tasks = tasks;
+    }
+
+    triggerToast() {
+        this.messageService.triggerToast(this.message);
     }
 
 }

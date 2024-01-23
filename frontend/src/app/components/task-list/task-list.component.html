@@ -1,11 +1,8 @@
 <div class="container">
 
-  <app-navbar (message)="handleMessageFromChild($event)" (returnTasks)="handleTasksFromChild($event)" [tasks]="tasks"></app-navbar>
+  <app-navbar (returnTasks)="handleTasksFromChild($event)" [tasks]="tasks"></app-navbar>
 
   <br />
-  <span *ngIf="message.message">
-    <p [class]="'alert alert-' + message.status">{{ message.message }}</p>
-  </span>
   <app-message></app-message>
 
   <table class="table">

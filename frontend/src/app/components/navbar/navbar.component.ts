@@ -19,7 +19,7 @@ export class NavbarComponent {
   url: string = this.router.url;
   addTaskForm: FormGroup;
   @Input() tasks: Task[] = [];
-  @Output() message: EventEmitter<Message> = new EventEmitter();
+  message: Message = new Message();
   @Output() returnTasks: EventEmitter<Task[]> = new EventEmitter();
 
   constructor(private _taskService: TaskService, private router: Router, private fb: FormBuilder, private messageService: MessageService) {
@@ -45,11 +45,14 @@ export class NavbarComponent {
           this.tasks.push(data);
           this.returnTasks.emit(this.tasks);
         }
-
-        this.message.emit(this.messageService.successMessage(data.name + " added successfully."));
-
+        this.message = new Message(data.name + " saved successfully", "success");
+        this.triggerToast();
       });
 
+  }
+
+  triggerToast() {
+    this.messageService.triggerToast(this.message);
   }
 
 }

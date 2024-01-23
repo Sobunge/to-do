@@ -1,27 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Message } from '../modal/message';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
 
-  message: Message;
+  private showToastSubject = new Subject<Message>();
 
-  constructor() { 
-    this.message = new Message();
-  }
+  showToast$ = this.showToastSubject.asObservable();
 
-  successMessage(outputMessage: string): Message {
-    return new Message(outputMessage, "success");
-  }
-
-  dangerMessage(outputMessage: string): Message {
-    return new Message(outputMessage, "danger");
-  }
-
-  warningMessage(outputMessage: string): Message {
-    return new Message(outputMessage, "warning");
+  triggerToast(message: Message) {
+    this.showToastSubject.next(message);
   }
 }

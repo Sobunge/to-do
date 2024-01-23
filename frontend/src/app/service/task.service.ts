@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of, tap } from 'rxjs';
 import { Task } from '../modal/task';
+import { MessageService } from './message.service';
+import { Message } from '../modal/message';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +11,10 @@ import { Task } from '../modal/task';
 export class TaskService {
 
   private taskUrl: string = "http://localhost:8080/api/"
-
+  public message: Message = new Message();
   public url: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private messageService: MessageService) {
     this.url = "";
   }
 
@@ -24,8 +26,12 @@ export class TaskService {
 
   getTasks(): Observable<Task[]> {
     this.url = this.taskUrl + "items";
-    return this.http.get<Task[]>(this.url);
+    return this.http.get<Task[]>(this.url)
+    .pipe(
+      catchError(this.handleError<Task[]>("getTasks", []))
+    );
   }
+ 
 
   getTask(taskId: number): Observable<Task> {
     this.url = this.taskUrl + "items/" + taskId;
@@ -39,7 +45,11 @@ export class TaskService {
 
   getUnfinishedTasks(): Observable<Task[]> {
     this.url = this.taskUrl + "items/unfinished";
-    return this.http.get<Task[]>(this.url);
+    return this.http.get<Task[]>(this.url)
+    .pipe(
+      tap(_ => console.log("Getting tasks successfull")),
+      catchError(this.handleError<Task[]>("getTasks", []))
+    );
   }
 
   changeTaskToFinished(taskId: number): Observable<Task> {
@@ -60,6 +70,28 @@ export class TaskService {
   deleteTask(taskId: number): Observable<Task> {
     const url = this.taskUrl + "items/" + taskId;
     return this.http.delete<Task>(url, this.httpOptions);
+  }
+
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   *
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      /*this.message = new Message(`${operation} failed: ${error.message}`, "danger");
+      this.messageService.triggerToast(this.message);*/
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 
 }

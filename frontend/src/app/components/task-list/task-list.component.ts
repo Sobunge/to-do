@@ -8,14 +8,14 @@ import { Status } from '../../modal/status';
 import { Router } from '@angular/router';
 import { Message } from '../../modal/message';
 import { MessageService } from '../../service/message.service';
-
+import { MessageComponent } from "../message/message.component";
 
 @Component({
     selector: 'app-task-list',
     standalone: true,
     templateUrl: './task-list.component.html',
     styleUrl: './task-list.component.css',
-    imports: [FooterComponent, NavbarComponent, NgFor, NgIf]
+    imports: [FooterComponent, NavbarComponent, NgFor, NgIf, MessageComponent]
 })
 
 export class TaskListComponent {

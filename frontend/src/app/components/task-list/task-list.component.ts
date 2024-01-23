@@ -21,8 +21,8 @@ import { MessageService } from '../../service/message.service';
 export class TaskListComponent {
 
     @Input() tasks: Task[] = [];
-    public message: Message | undefined;
     public task: Task | undefined;
+    public message: Message = new Message();
 
     constructor(private _taskService: TaskService, private router: Router, public messageService: MessageService) { }
 
@@ -58,23 +58,20 @@ export class TaskListComponent {
 
     deleteTask(taskId: number): void {
 
-        let url: string;
-
-        this._taskService.getTask(taskId).subscribe(data => {
-            this.task = data;
-            if (data.status === Status.FINISHED) {
-                url = "finished";
-            } else {
-                url = "unfinished";
-            }
-        });
-
         this.tasks = this.tasks.filter(task => task.id !== taskId);
         this._taskService.deleteTask(taskId)
-            .subscribe();
+            .subscribe(() => {
+                this.message = this.messageService.successMessage("Task deleted successfully.");
+            });
 
-        this.message = new Message("Task deleted successfully", "danger");
+    }
 
+    handleMessageFromChild(message: Message) {
+        this.message = message;
+    }
+
+    handleTasksFromChild(tasks: Task[]) {
+        this.tasks = tasks;
     }
 
 }

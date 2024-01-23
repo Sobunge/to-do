@@ -7,21 +7,21 @@ import { Observable } from 'rxjs';
 })
 export class MessageService {
 
-  message: Message | undefined;
+  message: Message;
 
-  constructor() { }
-
-  successMessage(outputMessage: string): void {
-    console.log('Setting success message:', outputMessage);
-    this.message = new Message(outputMessage, "success");
-    console.log('Message set:', this.message);
+  constructor() { 
+    this.message = new Message();
   }
 
-  dangerMessage(outputMessage: string): void {
-    this.message = new Message(outputMessage, "danger");
+  successMessage(outputMessage: string): Message {
+    return new Message(outputMessage, "success");
   }
 
-  warningMessage(outputMessage: string): void {
-    this.message = new Message(outputMessage, "warning");
+  dangerMessage(outputMessage: string): Message {
+    return new Message(outputMessage, "danger");
+  }
+
+  warningMessage(outputMessage: string): Message {
+    return new Message(outputMessage, "warning");
   }
 }

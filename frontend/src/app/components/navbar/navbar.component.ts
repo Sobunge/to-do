@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TaskService } from '../../service/task.service';
@@ -14,11 +14,13 @@ import { Message } from '../../modal/message';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
-  public tasks: Task[] = [];
+  url: string = this.router.url;
   addTaskForm: FormGroup;
-  public message: Message | undefined;
+  @Input() tasks: Task[] = [];
+  @Output() message: EventEmitter<Message> = new EventEmitter();
+  @Output() returnTasks: EventEmitter<Task[]> = new EventEmitter();
 
   constructor(private _taskService: TaskService, private router: Router, private fb: FormBuilder, private messageService: MessageService) {
     this.addTaskForm = this.fb.group({
@@ -26,29 +28,26 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.gettingAllUnFinishedTasks();
-  }
-
-  gettingAllUnFinishedTasks(): void {
-    this._taskService.getUnfinishedTasks()
-      .subscribe(data => this.tasks = data);
-  }
-
   addTask(): void {
 
     const input: Task = this.addTaskForm.value;
+    this.url = this.router.url;
+
     let task: Task = {
       id: 0,
       name: input.name,
       status: Status.UNFINISHED
-    };
+    }
 
-    this.messageService.successMessage("Task successfully saved");
-  
     this._taskService.addTask(task)
       .subscribe(data => {
-        this.tasks.push(data);
+        if (this.url === "/unfinished") {
+          this.tasks.push(data);
+          this.returnTasks.emit(this.tasks);
+        }
+
+        this.message.emit(this.messageService.successMessage(data.name + " added successfully."));
+
       });
 
   }

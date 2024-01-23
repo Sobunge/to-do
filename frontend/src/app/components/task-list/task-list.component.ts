@@ -42,26 +42,35 @@ export class TaskListComponent {
     toggleTaskCompletionButton(taskId: number): void {
 
         this._taskService.getTask(taskId)
-            .subscribe(data => {
-                if (data.status === Status.FINISHED) {
+            .subscribe(task => {
+                if (task.status === Status.FINISHED) {
                     this._taskService.changeTaskToUnfinished(taskId)
-                        .subscribe(() => this._taskService.getFinishedTasks()
-                            .subscribe(data => this.tasks = data));
+                        .subscribe(changedTask => {
+                            this._taskService.getFinishedTasks()
+                                .subscribe(tasks => this.tasks = tasks);
+                            this.message = new Message(changedTask.name + " unfinished.", "success");
+                            this.triggerToast();
+                        });
                 } else {
                     this._taskService.changeTaskToFinished(taskId)
-                        .subscribe(() => this._taskService.getUnfinishedTasks()
-                            .subscribe(data => this.tasks = data));
+                        .subscribe(changedTask => {
+                            this._taskService.getUnfinishedTasks()
+                                .subscribe(tasks => this.tasks = tasks);
+                            this.message = new Message(changedTask.name + " finished.", "success");
+                            this.triggerToast();
+                        });
                 }
+
             });
 
     }
 
-    deleteTask(taskId: number): void {
+    deleteTask(task: Task): void {
 
-        this.message = new Message("Task successfully deleted", "success");
+        this.message = new Message(task.name + " successfully deleted", "success");
 
-        this.tasks = this.tasks.filter(task => task.id !== taskId);
-        this._taskService.deleteTask(taskId)
+        this.tasks = this.tasks.filter(toggledTask => toggledTask !== task);
+        this._taskService.deleteTask(task.id)
             .subscribe(() => {
                 this.triggerToast();
             });

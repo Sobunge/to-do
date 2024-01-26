@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FooterComponent } from "../footer/footer.component";
 import { NavbarComponent } from "../navbar/navbar.component";
 import { NgFor, NgIf } from '@angular/common';
@@ -9,22 +9,32 @@ import { Router } from '@angular/router';
 import { Message } from '../../modal/message';
 import { MessageService } from '../../service/message.service';
 import { MessageComponent } from "../message/message.component";
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-task-list',
     standalone: true,
     templateUrl: './task-list.component.html',
     styleUrl: './task-list.component.css',
-    imports: [FooterComponent, NavbarComponent, NgFor, NgIf, MessageComponent]
+    imports: [FooterComponent, NavbarComponent, NgFor, NgIf, MessageComponent, FormsModule, ReactiveFormsModule]
 })
 
 export class TaskListComponent {
 
+    public url: string = "";
     @Input() tasks: Task[] = [];
     public task: Task | undefined;
     public message: Message = new Message();
+    editTaskForm: FormGroup;
+    @ViewChild('exampleModal') exampleModal!: ElementRef;
+    recipient: string = "";
 
-    constructor(private _taskService: TaskService, private router: Router, public messageService: MessageService) { }
+    constructor(private _taskService: TaskService, private router: Router, private fb: FormBuilder, public messageService: MessageService) {
+        this.editTaskForm = this.fb.group({
+            id: [''],
+            name: ['']
+        });
+    }
 
     isTaskFinished(taskStatus: Status): boolean {
         if (taskStatus === Status.FINISHED) {
@@ -87,6 +97,37 @@ export class TaskListComponent {
 
     triggerToast() {
         this.messageService.triggerToast(this.message);
+    }
+
+    openEditTaskModal(task: Task): void {
+        this.editTaskForm.setValue({
+            id: task.id,
+            name: task.name
+        });
+    }
+
+    submitEditedTask() {
+
+        this.url = this.router.url;
+        const input: Task = this.editTaskForm.value;
+
+        this._taskService.getTask(input.id)
+            .subscribe(data => {
+                if (input.name !== data.name) {
+                    alert("Task name does not match");
+                } else {
+                    alert("Task name matches");
+                }
+            });
+
+    }
+
+    openModal(recipient: string): void {
+        this.recipient = recipient; // Set the recipient value
+    }
+
+    clearModal(): void {
+        this.recipient = ""; // Clear the recipient value when modal is closed
     }
 
 }

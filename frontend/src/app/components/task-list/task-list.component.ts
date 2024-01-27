@@ -114,9 +114,12 @@ export class TaskListComponent {
         this._taskService.getTask(input.id)
             .subscribe(data => {
                 if (input.name !== data.name) {
-                    alert("Task name does not match");
+                    this.message = new Message("Task name changed successfully", "success");
+                    this.messageService.triggerToast(this.message);
+                   
                 } else {
-                    alert("Task name matches");
+                    this.message = new Message("Task name is the same as previous.","warning");
+                    this.messageService.triggerToast(this.message);
                 }
             });
 

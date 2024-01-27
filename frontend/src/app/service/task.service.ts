@@ -32,7 +32,6 @@ export class TaskService {
       );
   }
 
-
   getTask(taskId: number): Observable<Task> {
     this.url = this.taskUrl + "items/" + taskId;
     return this.http.get<Task>(this.url)
@@ -58,32 +57,40 @@ export class TaskService {
   }
 
   changeTaskToFinished(taskId: number): Observable<Task> {
-    const url = this.taskUrl + "items/" + taskId + "/finished";
-    return this.http.put<Task>(url, {}, this.httpOptions)
+    this.url = this.taskUrl + "items/" + taskId + "/finished";
+    return this.http.put<Task>(this.url, {}, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   changeTaskToUnfinished(taskId: number): Observable<Task> {
-    const url = this.taskUrl + "items/" + taskId + "/unfinished";
-    return this.http.put<Task>(url, {}, this.httpOptions)
+    this.url = this.taskUrl + "items/" + taskId + "/unfinished";
+    return this.http.put<Task>(this.url, {}, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   addTask(task: Task): Observable<Task> {
-    const url = this.taskUrl + "items";
-    return this.http.post<Task>(url, task, this.httpOptions)
+    this.url = this.taskUrl + "items";
+    return this.http.post<Task>(this.url, task, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  editTask(task: Task): Observable<Task> {
+    this.url = this.taskUrl + "item/" + task.id;
+    return this.http.put<Task>(this.url, task, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   deleteTask(taskId: number): Observable<Task> {
-    const url = this.taskUrl + "items/" + taskId;
-    return this.http.delete<Task>(url, this.httpOptions)
+    this.url = this.taskUrl + "items/" + taskId;
+    return this.http.delete<Task>(this.url, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );

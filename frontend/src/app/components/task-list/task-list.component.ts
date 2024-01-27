@@ -126,7 +126,7 @@ export class TaskListComponent {
                             if (index !== -1) {
                                 this.tasks[index] = editedTask;
                             }
-                            this.message = new Message(input.name + " changed to " + editedTask.name + " successfully", "success");
+                            this.message = new Message("Task name changed successfully", "success");
                             this.messageService.triggerToast(this.message);
                         });
                 } else {

@@ -114,11 +114,23 @@ export class TaskListComponent {
         this._taskService.getTask(input.id)
             .subscribe(data => {
                 if (input.name !== data.name) {
-                    this.message = new Message("Task name changed successfully", "success");
-                    this.messageService.triggerToast(this.message);
-                   
+                    this.task = {
+                        id: input.id,
+                        name: input.name,
+                        status: data.status
+                    };
+
+                    this._taskService.editTask(this.task)
+                        .subscribe(editedTask => {
+                            const index = this.tasks.findIndex(i => i.id === editedTask.id);
+                            if (index !== -1) {
+                                this.tasks[index] = editedTask;
+                            }
+                            this.message = new Message(input.name + " changed to " + editedTask.name + " successfully", "success");
+                            this.messageService.triggerToast(this.message);
+                        });
                 } else {
-                    this.message = new Message("Task name is the same as previous.","warning");
+                    this.message = new Message("Task name is the same as previous.", "warning");
                     this.messageService.triggerToast(this.message);
                 }
             });

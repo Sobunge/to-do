@@ -122,12 +122,8 @@ export class TaskListComponent {
 
     }
 
-    openModal(recipient: string): void {
-        this.recipient = recipient; // Set the recipient value
-    }
-
     clearModal(): void {
-        this.recipient = ""; // Clear the recipient value when modal is closed
+        this.editTaskForm.reset(); // Reset edit task form when modal is closed
     }
 
 }

@@ -7,11 +7,11 @@ public class JwtResponseModel implements Serializable {
     private static final long serialVersionUID = 1L;
     private final String token;
 
-    private JwtResponseModel(String token) {
+    public JwtResponseModel(String token) {
         this.token = token;
     }
 
-    private String getToken() {
+    public String getToken() {
         return token;
     }
 }

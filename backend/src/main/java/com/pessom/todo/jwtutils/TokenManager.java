@@ -1,7 +1,6 @@
 package com.pessom.todo.jwtutils;
 
 import java.io.Serializable;
-import java.security.Signature;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +24,7 @@ public class TokenManager implements Serializable {
     @Value("${secret}")
     private String jwtSecret;
 
-    private String generateJwtToken(UserDetails userDetails) {
+    public String generateJwtToken(UserDetails userDetails) {
 
         Map<String, Object> claims = new HashMap<>();
 
@@ -37,7 +36,7 @@ public class TokenManager implements Serializable {
 
     }
 
-    private Boolean validateJwtToken(String token, UserDetails userDetails) {
+    public Boolean validateJwtToken(String token, UserDetails userDetails) {
 
         String username = getUsernameFromToken(token);
         final Claims claims = Jwts.parser().decryptWith(this.key()).build().parseSignedClaims(token).getPayload();
@@ -46,7 +45,7 @@ public class TokenManager implements Serializable {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired);
     }
 
-    private String getUsernameFromToken(String token) {
+    public String getUsernameFromToken(String token) {
 
         final Claims claims = Jwts.parser().decryptWith(this.key()).build().parseSignedClaims(token).getPayload();
 

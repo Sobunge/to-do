@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import io.micrometer.core.instrument.config.validate.Validated.Secret;
 
 @Component
 public class TokenManager implements Serializable {

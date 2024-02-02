@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 @Component
@@ -39,7 +38,7 @@ public class TokenManager implements Serializable {
     public Boolean validateJwtToken(String token, UserDetails userDetails) {
 
         String username = getUsernameFromToken(token);
-        final Claims claims = Jwts.parser().decryptWith(this.key()).build().parseSignedClaims(token).getPayload();
+        final Claims claims = Jwts.parser().verifyWith(key()).build().parseSignedClaims(token).getPayload();
         Boolean isTokenExpired = claims.getExpiration().before(new Date());
 
         return (username.equals(userDetails.getUsername()) && !isTokenExpired);
@@ -47,13 +46,13 @@ public class TokenManager implements Serializable {
 
     public String getUsernameFromToken(String token) {
 
-        final Claims claims = Jwts.parser().decryptWith(this.key()).build().parseSignedClaims(token).getPayload();
+        final Claims claims = Jwts.parser().verifyWith(key()).build().parseSignedClaims(token).getPayload();
 
         return claims.getSubject();
     }
 
     private SecretKey key() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
+        return Keys.hmacShaKeyFor(jwtSecret.getBytes());
     }
 
 }
